@@ -36,6 +36,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 main {
@@ -45,7 +46,8 @@ main {
   flex-grow: 1;
   justify-content: flex-start;
   align-items: center;
-  overflow-y: auto;    
+  overflow-y: auto;
+  
 }
 
 footer {
@@ -177,14 +179,4 @@ ul li::before {
   border-radius: 0.25px;
   padding-left: 10px;
   outline: none;
-}
-
-
-.header, .addForm, .search {
-  position: sticky;
-  top: 0;
-  background: white; /* Keeps background solid */
-  z-index: 100;
-  padding: 10px;
-  border-bottom: 2px solid #ccc;
 }
