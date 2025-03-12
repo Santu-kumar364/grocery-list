@@ -1,35 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from "./Header.jsx";
+import Contents from "./Contents.jsx";
+import Footer from "./Footer.jsx";
+import { useState } from "react";
+import AddItem from "./AddItem.jsx";
+import SearchItem from "./SearchItem.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("shoppingList")) || []
+  );
+
+  const [newItems, setNewItems] = useState("");
+  const [search, setSearch] = useState("");
+
+  const setAndsaveItems = (newItems) => {
+    setItems(newItems);
+    localStorage.setItem("shoppingList", JSON.stringify(newItems));
+  };
+
+  const addItem = (item) => {
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const myNewItem = { id, checked: false, item };
+    const listItems = [...items, myNewItem];
+    setAndsaveItems(listItems);
+  };
+
+  const handleCheck = (id) => {
+    const listItems = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setAndsaveItems(listItems);
+  };
+
+  const handleDelete = (id) => {
+    const listItems = items.filter((item) => item.id !== id);
+    setAndsaveItems(listItems);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!newItems) return;
+    addItem(newItems);
+    setNewItems("");
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <Header title="Grocery List" />
+      <AddItem
+        newItems={newItems}
+        setNewItems={setNewItems}
+        handleSubmit={handleSubmit}
+      />
+      <SearchItem 
+        search={search} 
+        setSearch={setSearch} 
+      />
+      <Contents
+        items={items.filter((item) =>
+          item.item.toLowerCase().includes(search.toLowerCase())
+        )}
+        handleCheck={handleCheck}
+        handleDelete={handleDelete}
+      />
+      <Footer length={items.length} />
+    </div>
+  );
 }
 
-export default App
+export default App;
+
+
+
+
+
+
+
+ 
