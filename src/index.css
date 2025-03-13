@@ -30,7 +30,6 @@ body {
 
 header {
   width: 650px;
-  padding: 0, 0.25px;
   background-color: mediumblue;
   color: aliceblue;
   display: flex;
@@ -47,6 +46,7 @@ main {
   justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
+  min-height: 72.3vh;
   
 }
 
@@ -57,6 +57,7 @@ footer {
   color: aliceblue;
   display: grid;
   place-content: center;
+
 }
  
 ul{
