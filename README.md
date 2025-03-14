@@ -12,7 +12,7 @@ The **Grocery List** is a simple React-based application that helps users manage
 
 ## Tech Stack  
 - **Frontend**: React (Vite), HTML, CSS  
-- **State Management**: React Hooks (`useState` useEffect)  
+- **State Management**: React Hooks (`useState`, `useEffect`)  
 - **Data Storage**: Browser **localStorage**  
 - **Styling**: CSS  
 
